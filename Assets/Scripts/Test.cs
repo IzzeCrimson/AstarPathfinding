@@ -5,11 +5,20 @@ using UnityEngine;
 public class Test : MonoBehaviour
 {
 
+    private Pathfinding pathfinding;
+    public int x, y;
+
     void Start()
     {
-        Grid grid = new Grid(20, 10, 1);
+        pathfinding = new Pathfinding(5, 5);
         
     }
 
-    
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            pathfinding.grid.GetNode(x, y);
+        }
+    }
 }
