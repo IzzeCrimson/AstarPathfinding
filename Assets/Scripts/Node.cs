@@ -8,9 +8,12 @@ public class Node
     public int xPosition;
     public int yPosition;
 
+    public bool isTraversable;
     public int gCost;
     public int hCost;
     public int fCost;
+
+    public int uniqueID;
 
     public Node previousNode;
 
@@ -20,6 +23,14 @@ public class Node
         this.xPosition = xPosition;
         this.yPosition = yPosition;
 
+        isTraversable = true;
+        uniqueID = 0;
+    }
+
+    public void CalculateFCost()
+    {
+        fCost = gCost + hCost;
+        
     }
 
 }
