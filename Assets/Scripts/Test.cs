@@ -9,34 +9,38 @@ public class Test : MonoBehaviour
     private Pathfinding pathfinding;
     private Vector3 mousePosition;
     private Vector3 mouseWorldPosition;
-    private GameObject cube;
+
 
     void Start()
     {
-        pathfinding = new Pathfinding(5, 5);
-        //cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube.GetComponent<Renderer>().material.color = Color.blue;
-        //cube.transform.localScale = new Vector3(.1f, .1f, .1f);
+        pathfinding = new Pathfinding(10, 10);
+        
     }
 
     private void Update()
     {
+        mousePosition = Input.mousePosition;
+        mousePosition.z = Camera.main.transform.position.z * -1;
+        mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+
         if (Input.GetMouseButtonDown(0))
         {
-            mousePosition = Input.mousePosition;
-            mousePosition.z = 4.9f;
-            mouseWorldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            pathfinding.grid.GetGridCordinates(mouseWorldPosition, out int x, out int y);
+            //Debug.Log(grid[x, y].uniqueID + ", " + grid[x, y].isTraversable);
 
-            Node[,] grid = pathfinding.grid.GetArray();
-            pathfinding.GetGrid().GetGridXY(mouseWorldPosition, out int x, out int y);
-            Debug.Log(grid[x, y].uniqueID);
             List<Node> path = pathfinding.FindPath(0, 0, x, y);
-
-            //for (int i = 0; i < path.Count; i++)
-            //{
-            //    Debug.DrawLine(new Vector3(path[i].xPosition, path[i].yPosition) * 5 + Vector3.one * 1f, new Vector3(path[i+1].xPosition, path[i].yPosition) * 5 + Vector3.one * 1f, Color.green, 100f);
-            //}
+            for (int i = 0; i < path.Count - 1; i++)
+            {
+                Debug.DrawLine(path[i].worldPosition, path[i+1].worldPosition, Color.green, 10f);
+            }
         }
-        //cube.transform.position = mouseWorldPosition;
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Node[,] grid = pathfinding.grid.gridArray;
+            pathfinding.grid.GetGridCordinates(mouseWorldPosition, out int x, out int y);
+            grid[x, y].DisableTile();
+        }
     }
 }
