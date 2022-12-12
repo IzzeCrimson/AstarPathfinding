@@ -101,6 +101,19 @@ public class Pathfinding
         return null;
     }
 
+    public List<Vector3> GetWorldPositionList(int startX, int startY, int endX, int endY)
+    {
+        List<Vector3> list = new List<Vector3>();
+        List<Node> path = FindPath(startX, startY, endX, endY);
+
+        for (int i = 0; i < path.Count; i++)
+        {
+            list.Add(grid.GetWorldPosition(path[i].xPosition, path[i].yPosition));
+        }
+
+        return list;
+    }
+
     //Loops through the OpenList to fin the lowest F Cost Node
     //If 2 Nodes have the same F Cost, then the H Cost is compared instead
     private Node GetLowestFCostNode(List<Node> nodesList)

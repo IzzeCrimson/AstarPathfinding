@@ -33,7 +33,7 @@ public class Grid
                 Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i, j + 1), Color.red, Mathf.Infinity);
                 Debug.DrawLine(GetWorldPosition(i, j), GetWorldPosition(i + 1, j), Color.red, Mathf.Infinity);
 
-                gridArray[i, j] = new Node(i, j, cellSize, cellSize, GetWorldPosition(i, j) + new Vector3(cellSize, cellSize) * .5f, Color.white);
+                gridArray[i, j] = new Node(i, j, cellSize, cellSize, GetWorldPosition(i, j) + new Vector3(cellSize, cellSize) * .5f, Color.grey);
                 gridArray[i, j].uniqueID = idCounter;
                 idCounter++;
 

@@ -38,9 +38,9 @@ public class Test : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            Node[,] grid = pathfinding.grid.gridArray;
+            Node[,] gridArray = pathfinding.grid.gridArray;
             pathfinding.grid.GetGridCordinates(mouseWorldPosition, out int x, out int y);
-            grid[x, y].DisableTile();
+            gridArray[x, y].DisableTile();
         }
     }
 }
